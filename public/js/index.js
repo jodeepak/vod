@@ -327,6 +327,14 @@ $(video).bind('webkitfullscreenchange mozfullscreenchange fullscreenchange', fun
 });
 
 
+$(video).bind("ended", function() {
+    console.log('inside ended')
+    document.webkitExitFullscreen();
+    document.mozCancelFullscreen();
+    document.exitFullscreen();
+    cleanVideo()
+});
+
 
 function cleanVideo(){
     //console.log('exit fullscreen')
