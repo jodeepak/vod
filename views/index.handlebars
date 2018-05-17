@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Media App</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template -->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" type="text/css">
+
+  <link href="/css/index.css" rel="stylesheet">
+
+  <style>
+
+  .modal {
+    text-align: center;
+    padding: 0!important;
+  }
+
+  .modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px; 
+  }
+
+  .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .modal-video {
+      width: 675px;
+      margin: 30px auto;
+  }
+
+  .modal-dialog{
+    max-width: 100% !important;
+  }
+
+  </style>
+
+<script>
+  
+  var userInfo = {{{data}}}
+
+</script>
+
+</head>
+
+<body>
+  
+
+  <div class="contain" style="margin-top: 50px;">
+    <h1>Media App</h1><br/>
+    
+  </div>
+
+  <video controls autoplay style="width: 640px; height: auto; margin:0 auto; frameborder:0; display:none;"  controlsList="nodownload" id="playerVideo">
+            
+            Your browser doesn't support HTML5 video tag.
+          </video>
+
+  <div class="modal modalPlayer fadeIn animated"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content modal-video">      
+        <div class="modal-header">
+          <h4 class="modal-title" style="color: black;">Movie Name</h4>        
+          <button type="button" class="close pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
+        </div>
+        <div class="modal-body">        
+          <!--<video controls autoplay style="width: 640px; height: auto; margin:0 auto; frameborder:0;"  controlsList="nodownload" id="playerVideo">
+            
+            Your browser doesn't support HTML5 video tag.
+          </video>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>  
+  <script src="/js/index.js"></script>
+  <script>
+
+
+
+  </script>
+
+</body>
+
+</html>

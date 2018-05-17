@@ -1,0 +1,212 @@
+@charset "UTF-8";
+body, html {
+  padding: 0 10px;
+  margin: 0;
+  background: #0e0f11;
+  color: #ecf0f1;
+  font-family: 'Open Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%; }
+
+* {
+  box-sizing: border-box; }
+
+h1 {
+  text-align: center; }
+
+p {
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  margin: auto; }
+
+a:link, a:hover, a:active, a:visited {
+  transition: color 150ms;
+  color: #95a5a6;
+  text-decoration: none; }
+a:hover {
+  color: #7f8c8d;
+  text-decoration: underline; }
+
+.contain {
+  width: 100%; }
+
+.genre {
+  display: flex; }
+
+.left-controls {
+  position: relative;
+  width: 50px;
+  height: 250px;
+  z-index: 40;
+  opacity: 1;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  display: webkit box;
+  display: webkit flex;
+  display: moz box;
+  display: ms flexbox;
+  display: flex;
+  color: #fff;
+  margin: 41.6666666667px 0;
+  margin-right: 20px; }
+
+.fa-chevron-left-extra {
+  align-self: center;
+  position: relative;
+  height: auto;
+  transform-origin: 55% 50%;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 2.5vw;
+  transition: transform .1s ease-out 0s;
+  transition-property: transform;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
+  transition-delay: 0s;
+  color: white;
+  opacity: .5; }
+  .fa-chevron-left-extra:hover {
+    opacity: 1; }
+
+.right-controls {
+  position: relative;
+  width: 50px;
+  height: 250px;
+  z-index: 40;
+  opacity: 1;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  display: webkit box;
+  display: webkit flex;
+  display: moz box;
+  display: ms flexbox;
+  display: flex;
+  color: #fff;
+  margin: 41.6666666667px 0;
+  margin-left: 20px; }
+
+.fa-chevron-right-extra {
+  align-self: center;
+  position: relative;
+  height: auto;
+  transform-origin: 55% 50%;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 2.5vw;
+  transition: transform .1s ease-out 0s;
+  transition-property: transform;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
+  transition-delay: 0s;
+  color: white;
+  opacity: .5; }
+  .fa-chevron-right-extra:hover {
+    opacity: 1; }
+
+.row {
+  display: flex;
+  overflow: hidden;
+  width: 100%; }
+
+.row__inner {
+  transition: 450ms transform;
+  font-size: 0;
+  white-space: nowrap;
+  /*margin: ($tileHeight / 2) 0;*/
+  margin: 41.6666666667px 0;
+  padding-bottom: 10px; }
+
+.tile {
+  position: relative;
+  display: inline-block;
+  width: 166.6666666667px;
+  height: 250px;
+  margin-right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 450ms all;
+  transform-origin: center left; }
+
+.tile__img {
+  width: 166.6666666667px;
+  height: 250px;
+  object-fit: cover; }
+
+.tile__details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  font-size: 10px;
+  opacity: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+  transition: 450ms opacity; }
+  .tile__details:after, .tile__details:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: #000; }
+  .tile__details:after {
+    margin-top: -25px;
+    margin-left: -25px;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #ecf0f1;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1; }
+  .tile__details:before {
+    content: '▶';
+    left: 0;
+    width: 100%;
+    font-size: 30px;
+    margin-left: 4px;
+    margin-top: -23px;
+    text-align: center;
+    z-index: 2; }
+
+.tile:hover .tile__details {
+  opacity: 1; }
+
+.tile__title {
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+  font-size: 12px; }
+
+.row__inner:hover {
+  transform: translate3d(-16.6666666667px, 0, 0); }
+  .row__inner:hover .tile {
+    opacity: 0.3; }
+    .row__inner:hover .tile:hover {
+      transform: scale(1.2);
+      opacity: 1; }
+
+.tile:hover ~ .tile {
+  transform: translate3d(33.3333333333px, 0, 0); }
+
+.highlightTile {
+  transform: scale(1.2);
+  z-index: 1000; }
+  .highlightTile .tile__details {
+    opacity: 1; }
+    .highlightTile .tile__details .tile__title {
+      z-index: 1000; }
+
+/*# sourceMappingURL=index.css.map */
