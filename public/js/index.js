@@ -60,10 +60,6 @@ $( document ).ready(function() {
             console.log(data.genres[index].name)   
             addGenre(data.genres[index],index,data.genres.length)   
         });
-        /*addGenre(data.genres[0])
-        addGenre(data.genres[2])
-        addGenre(data.genres[3])
-        addGenre(data.genres[4])*/
     });
 })
 
@@ -72,7 +68,7 @@ $( document ).ready(function() {
 //${data.results[index].contents[0].url}
 
 
-
+// Adds New Carousal(Genre) to the view and adds tiles
 function addGenre(genre,currIndex,maxIndex){
     var genreName = genre.name.replace(/\s/g, '')
     var genreContainer = `
@@ -122,10 +118,11 @@ function addGenre(genre,currIndex,maxIndex){
             });
             showHideWatchHistory()
             updateMasterData('RecentlyWatched');
-        }, 0);                       
+        }, 500);                       
     }
 }
 
+// Generates Individual Tile HTML Content
 function getTileHTML(movieInfo,genreName,index){
     var container = `
         <div class="tile" id="${genreName+'tile'+index}" onclick="openPlayerModal(${movieInfo.id},'${movieInfo.title}','${movieInfo.videoUrl}','${movieInfo.posterUrl}')">
@@ -142,6 +139,7 @@ function getTileHTML(movieInfo,genreName,index){
     return container
 }
 
+// Updates Master Data
 function updateMasterData(genreName){
     //console.log('inside updatemasterdata ' + genreName)
     var leftArrowContent = `<div class="left-controls" role="button" aria-label="See Previous" onclick="moveLeft('${genreName}')">
@@ -166,6 +164,7 @@ function updateMasterData(genreName){
     //console.log('inside update')
 }
 
+// Scrolls the Selected Carousel to the Right
 function moveRight(element){
     if(masterData[element].enableRightArrow && !masterData[element].scrollLock){
         //console.log(JSON.stringify(masterData))
@@ -207,6 +206,7 @@ function moveRight(element){
     }
 }
 
+// Scrolls the Selected Carousel to the Left
 function moveLeft(element){
     if(masterData[element].enableLeftArrow && !masterData[element].scrollLock){
         masterData[element].scrollLock = true
@@ -246,6 +246,7 @@ function moveLeft(element){
     }
 }
 
+// Reset all Arrow Controls
 function resetAll(element){    
     masterData[element].enableRightArrow = true
     masterData[element].enableLeftArrow = true
@@ -253,6 +254,7 @@ function resetAll(element){
     $('#outer'+element+' .right-controls .rightarrow' ).fadeIn();
 }
 
+// Add Movie to User's Watch History
 function updateAndSyncWatchHistory(mId){
     if(!movieAlreadyInWatchHistory(mId)){
         watchHistory.unshift(mId)
@@ -274,14 +276,16 @@ function updateAndSyncWatchHistory(mId){
     console.log(JSON.stringify(watchHistory))
 }
 
+// Store User's Watch History to server
 function storeWatchHistory(){
-    $.post("/api/user/" + userInfo.id + "/storeHistory",{
+    $.post("/api/user/" + userInfo._id + "/storeHistory",{
         watch_history: JSON.stringify(watchHistory)
     }, function(data, status){
         console.log("Data: " + data + "\nStatus: " + status);
     });
 }
 
+// If Current movie already in watch history
 function movieAlreadyInWatchHistory(mId){
     var hasFound = false
     $.each(watchHistory, function( index, value ) {
@@ -291,6 +295,7 @@ function movieAlreadyInWatchHistory(mId){
     return hasFound;
 }
 
+// Show/Hide Recently Watched Carousel
 function showHideWatchHistory(){
     if(watchHistory.length > 0)
         $('#parentRecentlyWatched').fadeIn();
@@ -298,10 +303,10 @@ function showHideWatchHistory(){
         $('#parentRecentlyWatched').hide();
 }
 
+// Play Video
 function openPlayerModal(movieId,movieName,movieUrl,moviePoster){
     //console.log(movieName + '\n' + movieUrl + '\n' + moviePoster)   
     video.pause();
-    //<source id="videoSrc" src="#" type="video/mp4">
     $('#playerVideo').attr('src',movieUrl)
     $('.modal-title').html(movieName)
     video.load();
@@ -314,19 +319,18 @@ function openPlayerModal(movieId,movieName,movieUrl,moviePoster){
         video.webkitRequestFullscreen();
     }    
     updateAndSyncWatchHistory(movieId)
-    //$('.modalPlayer').modal('show');
 }
 
+// on fullscreen on or fullscreen off
 $(video).bind('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(e) {
     var state = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
     var event = state ? 'FullscreenOn' : 'FullscreenOff';
     if(!state)
         cleanVideo()
-    // Now do something interesting
-    //console.log('Event: ' + event);  
 });
 
 
+// On video ended close fullscreen and clean video player
 $(video).bind("ended", function() {
     console.log('inside ended')
     document.webkitExitFullscreen();
@@ -336,6 +340,7 @@ $(video).bind("ended", function() {
 });
 
 
+// Pause video and clear video player
 function cleanVideo(){
     //console.log('exit fullscreen')
     $('#playerVideo').hide()
@@ -343,11 +348,14 @@ function cleanVideo(){
     $('#playerVideo').attr('src', '');
 }
 
+// On Modal Close
 $('.modalPlayer').on('hidden.bs.modal', function () {    
     video.pause();
     $('#playerVideo').attr('src', '');
 })
 
+
+// On Window Resize, recalculate Carousel widths
 $(window).resize(function(){
     //console.log('resize')
     $.each(masterData, function(genre, val) {
@@ -371,10 +379,9 @@ $(window).resize(function(){
                 masterData[genre].scrollWidth =  masterData[genre].scrollWidth + (masterData[genre].visibleWidth - oldScrollWidth)
         }
     });
-
-
 });
 
+// Adding Keyboard Controls
 $(document).keydown(function(e) {
     //console.log(e.keyCode);
     if(e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 13 || e.keyCode == 27){
@@ -387,7 +394,9 @@ $(document).keydown(function(e) {
         //console.log(cursor)
         //console.log('#' + cursor.currentGenre + 'tile'+cursor.currentTile)
         //$('#' + cursor.currentGenre + ' > div:nth-child('+cursor.currentTile+')').mouseenter()
-        //$('#' + cursor.currentGenre + 'tile'+cursor.currentTile).addClass('highlightTile')        
+        //$('#' + cursor.currentGenre + 'tile'+cursor.currentTile).addClass('highlightTile')       
+
+        // On Right Arrow Pressed, move cursor to next tile
         if(e.keyCode == 39){
             var maxGenreLength = $('#' + cursor.currentGenre + ' .tile').length-1
             if(cursor.currentTile < maxGenreLength){
@@ -402,6 +411,8 @@ $(document).keydown(function(e) {
                 }
             }
         }
+
+        // On Left Arrow Pressed, move cursor to previous tile
         if(e.keyCode == 37){
             if(cursor.currentTile > 0){
                 $('#' + cursor.currentGenre + 'tile'+cursor.currentTile).removeClass('highlightTile')
@@ -415,6 +426,8 @@ $(document).keydown(function(e) {
                 }
             }
         }
+
+        // On Down Arrow Pressed, move cursor to next Genre Carousel
         if(e.keyCode == 40){
             $('.row__inner').each(function (index, obj){
                 if(obj.id == cursor.currentGenre){
@@ -435,6 +448,8 @@ $(document).keydown(function(e) {
                 }
             });
         }
+
+        // On Up Arrow Pressed, move cursor to Previous Genre Carousel
         if(e.keyCode == 38){
             $('.row__inner').each(function (index, obj){
                 if(obj.id == cursor.currentGenre){
@@ -455,9 +470,13 @@ $(document).keydown(function(e) {
                 }
             });
         }
+
+        // On Enter Key Pressed, play current selected tile's video
         if(e.keyCode == 13){
             $('#' + cursor.currentGenre + 'tile'+cursor.currentTile).click()
         }
+
+        // On ESC Key Pressed, clear cursor
         if(e.keyCode == 27){
             $('#' + cursor.currentGenre + 'tile'+cursor.currentTile).removeClass('highlightTile')
             cursor.currentTile = 0
@@ -471,6 +490,8 @@ $('.tile').hover( function(){
     cursor.currentTile = 0
 });
 
+
+// Supporting Functionalities
 
 $.fn.extend({
     scrollRight: function (val) {
