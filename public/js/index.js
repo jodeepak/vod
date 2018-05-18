@@ -61,6 +61,9 @@ $( document ).ready(function() {
             addGenre(data.genres[index],index,data.genres.length)   
         });
     });
+    setTimeout(function(){
+        $('.loadingClass').hide()
+    }, 1000);      
 })
 
 

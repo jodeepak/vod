@@ -27,7 +27,7 @@ router.post('/:Id/storeHistory',function(req,res){
     })
     .exec(function(err, data) {
         if (err) throw err;       
-        console.log(data)
+        //console.log(data)
         data.watch_history = body.watch_history;
         data.save(function(err){
             if(err) console.log(err); 

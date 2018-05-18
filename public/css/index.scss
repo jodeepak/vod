@@ -255,3 +255,27 @@ a {
   }
   //border: 2px solid red;
 }
+
+
+.loadingClass{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999999999 !important;;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: visibility 175ms, opacity 175ms;
+  display: table;
+  text-shadow: 1px 1px 2px #000;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.85);
+}
+.loadingImg {
+  width: 100%; height: 100%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  transition: font-size 175ms;
+  zoom: 200%;
+}
