@@ -1,4 +1,5 @@
 **Application Features**
+>
 1. The application should display a list of videos in a horizontal carousel on the
 home page, which should be scrollable.
 2. The user should be able to select a video to play in full screen.
@@ -13,10 +14,11 @@ screen sizes. You do not need to implement a mobile view but it should at
 least adjust based on the desktop browser width.
 
 **Advanced Add-on Features**
-• Adding lazy load functionality in your carousel
-• Implementing multiple carousels in categories
-• Implementing movie information popup window
-• Anything else you can think of
+>
+1. Adding lazy load functionality in your carousel
+2. Implementing multiple carousels in categories
+3. Implementing movie information popup window
+4. Anything else you can think of
 
 **To Run the Project**
 
