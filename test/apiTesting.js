@@ -16,7 +16,7 @@ describe('#Update Watch History', function() {
             .post('/api/user/5afe5076734d1d7d453ef93c/storeHistory')
             .send({
                 watch_history:
-                  [490214,333339]
+                JSON.stringify([490214,333339])
               })
             .end(function(err, res) {
                 //console.log(JSON.stringify(res))
